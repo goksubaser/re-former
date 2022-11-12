@@ -1,5 +1,13 @@
 class UsersController < ApplicationController
 
+  def index
+    @users = User.all
+  end
+
+  def show
+    @user = User.find(params[:id])
+  end
+
   # GET /users/new
   def new
     @user = User.new
@@ -24,7 +32,7 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update(allowed_user_params)
-      redirect_to new_user_path
+      redirect_to @user
     else
       render :new, status: :unprocessable_entity
     end
